@@ -1,0 +1,10 @@
+
+
+type NFTTransfer @entity(immutable: true) {
+  id: ID!
+  from: Bytes! 
+  to: Bytes!
+  tokenURI: String! 
+  price: BigInt! 
+
+}

@@ -1,0 +1,52 @@
+# Importing necessary libraries and modules
+import nltk
+from newspaper import Article 
+import openai
+import re
+
+# Downloading the 'punkt' resource for NLTK
+nltk.download('punkt')
+
+# Function to extract the summary of an article from a given URL
+def get_summary(url):
+    # Creating an Article object using the provided URL
+    article = Article(url)
+    article.download()
+    article.parse()
+    article.nlp()
+    article_summary = article.summary 
+    return article_summary 
+
+# Function to interact with the GPT-3 model using OpenAI API
+def gpt3(text):
+    # Setting the OpenAI API key
+    openai.api_key = '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'
+    
+    # Generating a response using the GPT-3 model
+    response = openai.Completion.create(
+        model="gpt-3.5-turbo-instruct",
+        prompt=text,
+        temperature=0.3,
+        max_tokens=2000,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=1
+    )
+    
+    # Extracting and printing the content of the GPT-3 response
+    content = response.choices[0].text
+    print(content)
+    return content
+
+# Function to perform fact-checking based on the email header
+def fact_check(text_piece):
+    # Setting the topic for fact-checking
+    topic = text_piece
+    
+    # Generating a GPT-3 prompt for fact-checking
+    query = f"I will provide you few words help me generate a song based on those words .Song should be in 200 words .Input Words : {topic} ."
+    
+    # Using the gpt3 function to get a response for fact-checking
+    response = gpt3(query)
+    print(response)
+    return response
