@@ -112,10 +112,9 @@ export default function Shazam() {
         </div>
       )} */}
 
-<div>
-          <h2>Title:Sanwre {title}</h2>
-          <h3>Subtitle:Akhil Sachdeva {subtitle}</h3>
-        </div>
+      <div>
+
+      </div>
     </div>
   );
 }
